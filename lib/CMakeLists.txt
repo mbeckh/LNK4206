@@ -4,6 +4,7 @@ add_library(lib::lib ALIAS lib)
 target_compile_definitions(lib PRIVATE WIN32_LEAN_AND_MEAN=1 NOMINMAX=1)
 target_compile_features(lib PUBLIC cxx_std_20)
 target_precompile_headers(lib PRIVATE "pch.h")
+target_compile_options(lib PRIVATE /Ylfoo)
 
 target_include_directories(lib PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>" "include")
 
