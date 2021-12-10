@@ -67,7 +67,7 @@ endif()
 add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/experimental:external;/external:W0>")
 set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "/external:I " CACHE STRING "" FORCE)
 
-add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
+#add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
 
 #add_compile_options("$<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>>:/FC>"
 #					"$<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<NOT:$<OR:$<CONFIG:Debug>,$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>>>:/d1trimfile:$<SHELL_PATH:$<TARGET_PROPERTY:SOURCE_DIR>/>>"
