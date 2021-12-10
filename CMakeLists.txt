@@ -37,15 +37,14 @@ add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:/EHsc;/GR-;/permissive-;$<$<CONFI
 add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<$<CONFIG:Debug>:/Od>;$<$<CONFIG:Release>:/Gw;/O2;/Ob3>>")
 add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<$<CONFIG:Debug>:/RTC1>;/sdl>")
 add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/W4;/wd4373;$<$<CONFIG:Release>:/WX>>")
-#add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/nologo;/bigobj;/diagnostics:caret;/utf-8>")
-add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/nologo;/diagnostics:caret;/utf-8>")
+add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/nologo;/bigobj;/diagnostics:caret;/utf-8>")
 add_link_options("$<$<CONFIG:Release>:/OPT:ICF;/OPT:REF>")
 
 if(NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION AND NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE)
 	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON CACHE BOOL "")
 endif()
 	
-add_link_options(/PDBALTPATH:%_PDB%)
+#add_link_options(/PDBALTPATH:%_PDB%)
 
 add_link_options(/NOLOGO "$<$<NOT:$<OR:$<BOOL:$<TARGET_PROPERTY:INTERPROCEDURAL_OPTIMIZATION>>,$<BOOL:$<TARGET_PROPERTY:INTERPROCEDURAL_OPTIMIZATION_$<UPPER_CASE:$<CONFIG>>>>>>:/INCREMENTAL$<$<CONFIG:Release>::NO>>")
 if(NOT CMAKE_STATIC_LINKER_FLAGS MATCHES "(^| )[/-][Nn][Oo][Ll][Oo][Gg][Oo]( |$)")
@@ -68,7 +67,8 @@ endif()
 add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/experimental:external;/external:W0>")
 set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "/external:I " CACHE STRING "" FORCE)
 
-add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
+
+#add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
 #add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>>")
 
 add_compile_options("$<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<OR:$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>>:/FC>"
