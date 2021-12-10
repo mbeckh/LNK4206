@@ -73,7 +73,7 @@ add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/
 #					"$<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<NOT:$<OR:$<CONFIG:Debug>,$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>>>:/d1trimfile:$<SHELL_PATH:$<TARGET_PROPERTY:SOURCE_DIR>/>>"
 #					"$<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<NOT:$<OR:$<CONFIG:Debug>,$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>>>:/d1trimfile:$<SHELL_PATH:$<TARGET_PROPERTY:BINARY_DIR>/>>")
 
-add_link_options("/DEBUG:$<IF:$<OR:$<NOT:$<CONFIG:Debug>>,$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>,FULL,FASTLINK>")
+#add_link_options("/DEBUG:$<IF:$<OR:$<NOT:$<CONFIG:Debug>>,$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>>,FULL,FASTLINK>")
 
 add_subdirectory(lib)
 add_subdirectory(src)
