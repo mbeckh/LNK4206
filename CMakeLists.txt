@@ -64,8 +64,8 @@ if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee]?[Bb][Uu]?[Gg]" OR CMAKE_BUILD_TYPE MATCHES
 	set(CMAKE_VS_JUST_MY_CODE_DEBUGGING ON CACHE BOOL "")
 endif()
 
-add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/experimental:external;/external:W0>")
-set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "/external:I " CACHE STRING "" FORCE)
+#add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:/experimental:external;/external:W0>")
+#set(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "/external:I " CACHE STRING "" FORCE)
 
 #add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
 
