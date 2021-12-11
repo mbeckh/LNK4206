@@ -4,24 +4,37 @@ set(CMAKE_BUILD_TYPE Release)
 
 project("LNK4206" LANGUAGES CXX)
 
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded" CACHE STRING "")
-
-if(NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION AND NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE)
-	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON CACHE BOOL "")
+if(OPTION_STATIC)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded" CACHE STRING "")
+else()
+	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL" CACHE STRING "")
 endif()
-	
-add_link_options("/WX")
 
-#add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
-#add_compile_options("$<IF:$<IN_LIST:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY;EXECUTABLE;MODULE_LIBRARY>,/Zi,/Z7>")
-# This works:
-# add_compile_options("/Zi")
-# This does not:
-add_compile_options("/Z7")
+if(OPTION_LTCG)
+	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON CACHE BOOL "")
+endif()
 
-#add_link_options("/DEBUG:FASTLINK")
-add_link_options("/DEBUG:FULL")
-#add_link_options("/DEBUG:$<IF:$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>,FULL,FASTLINK>")
+if(OPTION_WITH_PCH)
+	set(CMAKE_DISABLE_PRECOMPILE_HEADERS OFF)
+else()
+	set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
+endif()
+
+if(OPTION_Z7)
+	add_compile_options("/Zi")
+else()
+	add_compile_options("/Z7")
+endif()
+
+if(OPTION_WX)
+	add_link_options("/WX")
+endif()
+
+if(OPTION_FASTLINK)
+	add_link_options("/DEBUG:FASTLINK")
+else()
+	add_link_options("/DEBUG:FULL")
+endif()
 
 add_subdirectory(lib)
 add_subdirectory(src)
