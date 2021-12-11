@@ -36,7 +36,7 @@ else()
 	add_link_options("/DEBUG:FULL")
 endif()
 
-add_link_options("//LINKREPRO:linkrepro")
+add_link_options("/LINKREPRO:linkrepro")
 
 add_subdirectory(lib)
 add_subdirectory(src)
