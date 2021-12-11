@@ -15,6 +15,6 @@ set_target_properties(lib PROPERTIES
     CXX_EXTENSIONS OFF
 )
 
-set_target_properties(lib PROPERTIES
-	COMPILE_PDB_NAME "" # use default
-	COMPILE_PDB_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:lib>")
+#set_target_properties(lib PROPERTIES
+#	COMPILE_PDB_NAME "" # use default
+#	COMPILE_PDB_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:lib>")
