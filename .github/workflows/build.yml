@@ -19,7 +19,7 @@ jobs:
         pch: [ NoPCH, PCH ]
         debug: [ Zi, Z7 ]
         warning: [ NoWX, WX ]
-        pdb: [ FASTLINK, FULL ]
+        pdb: [ NONE, FASTLINK, FULL ]
         
     steps:
     - name: Checkout
