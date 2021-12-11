@@ -12,10 +12,13 @@ if(NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION AND NOT DEFINED CMAKE_INTERPRO
 	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON CACHE BOOL "")
 endif()
 	
-add_link_options("/WX")
+#add_link_options("/WX")
 
 #add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
 #add_compile_options("$<IF:$<IN_LIST:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY;EXECUTABLE;MODULE_LIBRARY>,/Zi,/Z7>")
+# This works:
+# add_compile_options("/Zi")
+# This does not:
 add_compile_options("/Z7")
 
 add_link_options("/DEBUG:FASTLINK")
