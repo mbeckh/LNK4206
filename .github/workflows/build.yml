@@ -8,11 +8,17 @@ on:
 
 jobs:
   build:
-    name: Build and Analyze
-    runs-on: windows-2022
+    name: Build
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        configuration: [ Release ]
+        os: [ windows-2019, windows-2022 ]
+        runtime: [ static, dynamic ]
+        ltcg: [ NoLTCG, LTCG ]
+        pch: [ NoPCH, PCH ]
+        debug: [ Zi, Z7 ]
+        warning: [ NoWX, WX ]
+        pdb: [ FASTLINK, FULL ]
     
     steps:
     - name: Checkout
@@ -23,9 +29,9 @@ jobs:
 
     - name: Configure
       shell: cmd
-      run: cmake -DCMAKE_BUILD_TYPE=${{inputs.configuration}} -G Ninja -S "${{inputs.source-dir}}" -B build/${{matrix.configuration}}
+      run: cmake -DCMAKE_BUILD_TYPE=Release -DOPTION_RUNTIME=${{matrix.runtime}} -DOPTION_LTCG=${{matrix.ltcg}} -DOPTION_PCH=${{matrix.pch}} -DOPTION_LTCG=${{matrix.debug}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_PDB=${{matrix.pdb}} -G Ninja -S "${{inputs.source-dir}}" -B build
 
     - name: Build
       shell: cmd
-      working-directory: build/${{matrix.configuration}}
+      working-directory: build
       run: cmake --build . -v
