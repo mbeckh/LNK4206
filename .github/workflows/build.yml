@@ -13,13 +13,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-2019, windows-2022 ]
-        runtime: [ dynamic, static ]
-        ltcg: [ NoLTCG, LTCG ]
-        pch: [ NoPCH, PCH ]
-        debug: [ Zi, Z7 ]
-        warning: [ NoWX, WX ]
-        pdb: [ FASTLINK, FULL ]
+        os: [ windows-2022 ] # windows-2019
+        runtime: [ static ] # dynamic
+        ltcg: [ LTCG ] # NoLTCG
+        pch: [ PCH ] # NoPCH
+        debug: [ Z7 ] # Zi
+        warning: [ WX ] # NoWX
+        pdb: [ FASTLINK ] # FULL
     
     steps:
     - name: Checkout
@@ -32,17 +32,19 @@ jobs:
       shell: cmd
       run: |
         cmake -DCMAKE_BUILD_TYPE=Release -DOPTION_RUNTIME=${{matrix.runtime}} -DOPTION_LTCG=${{matrix.ltcg}} -DOPTION_PCH=${{matrix.pch}} -DOPTION_DEBUG=${{matrix.debug}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_PDB=${{matrix.pdb}} -G Ninja -S "${{inputs.source-dir}}" -B build
-        mkdir build\linkrepro
 
     - name: Build
       shell: cmd
       timeout-minutes: 5
       working-directory: build
-      run: cmake --build . -v
+      run: |
+        mkdir ${{ github.workspace }}\linkrepro
+        set link_repro=${{ github.workspace }}\linkrepro
+        cmake --build . -v
     
     - name: Save Log
       if: ${{ failure() }}
       uses: actions/upload-artifact@v2.2.4
       with: 
         name: linkrepro-${{matrix.os}}-${{matrix.runtime}}-${{matrix.ltcg}}-${{matrix.pch}}-${{matrix.debug}}-${{matrix.warning}}-${{matrix.pdb}}
-        path: linkrepro/
+        path: ${{ github.workspace }}/linkrepro
