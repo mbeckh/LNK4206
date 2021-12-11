@@ -4,10 +4,10 @@ set(CMAKE_BUILD_TYPE Release)
 
 project("LNK4206" LANGUAGES CXX)
 
-add_compile_definitions(UNICODE=1 _UNICODE=1
-						WIN32=1 _WINDOWS=1
-						"$<$<CONFIG:Debug>:_DEBUG=1>" "$<$<CONFIG:Release>:NDEBUG=1>"
-						WINVER=0x0A00 _WIN32_WINNT=0x0A00)
+#add_compile_definitions(UNICODE=1 _UNICODE=1
+#						WIN32=1 _WINDOWS=1
+#						"$<$<CONFIG:Debug>:_DEBUG=1>" "$<$<CONFIG:Release>:NDEBUG=1>"
+#						WINVER=0x0A00 _WIN32_WINNT=0x0A00)
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
 
