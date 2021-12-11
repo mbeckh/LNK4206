@@ -23,7 +23,7 @@ jobs:
 
     - name: Configure
       shell: cmd
-      run: cmake -DCMAKE_BUILD_TYPE=${{inputs.configuration}} -G Ninja -D NO_CMAKE_UNITY_BUILD:BOOL=ON -D CMAKE_DISABLE_PRECOMPILE_HEADERS:BOOL=ON -S "${{inputs.source-dir}}" -B build/${{matrix.configuration}}
+      run: cmake -DCMAKE_BUILD_TYPE=${{inputs.configuration}} -G Ninja -S "${{inputs.source-dir}}" -B build/${{matrix.configuration}}
 
     - name: Build
       shell: cmd
