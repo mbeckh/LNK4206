@@ -32,8 +32,10 @@ endif()
 
 if(OPTION_PDB STREQUAL "FASTLINK")
 	add_link_options("/DEBUG:FASTLINK")
-else()
+elseif(OPTION_PDB STREQUAL "FULL")
 	add_link_options("/DEBUG:FULL")
+else()
+	add_link_options("/DEBUG:NONE")
 endif()
 
 add_subdirectory(lib)
