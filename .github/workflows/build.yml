@@ -11,6 +11,7 @@ jobs:
     name: Build
     runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
         os: [ windows-2019, windows-2022 ]
         runtime: [ static, dynamic ]
@@ -29,9 +30,17 @@ jobs:
 
     - name: Configure
       shell: cmd
-      run: cmake -DCMAKE_BUILD_TYPE=Release -DOPTION_RUNTIME=${{matrix.runtime}} -DOPTION_LTCG=${{matrix.ltcg}} -DOPTION_PCH=${{matrix.pch}} -DOPTION_LTCG=${{matrix.debug}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_PDB=${{matrix.pdb}} -G Ninja -S "${{inputs.source-dir}}" -B build
+      run: cmake -DCMAKE_BUILD_TYPE=Release -DOPTION_RUNTIME=${{matrix.runtime}} -DOPTION_LTCG=${{matrix.ltcg}} -DOPTION_PCH=${{matrix.pch}} -DOPTION_LTCG=${{matrix.debug}} -DOPTION_WARNING=${{matrix.warning}} -DOPTION_PDB=${{matrix.pdb}} -G Ninja -S "${{inputs.source-dir}}" -B build
 
     - name: Build
       shell: cmd
+      timeout-minutes: 5
       working-directory: build
       run: cmake --build . -v
+    
+    - name: Save Log
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2.2.4
+      with: 
+        name: linkrepro-${{matrix.os}}-${{matrix.runtime}}-${{matrix.ltcg}}-${{matrix.pch}}-${{matrix.debug}}-${{matrix.warning}}-${{matrix.pdb}}
+        path: linkrepro/
