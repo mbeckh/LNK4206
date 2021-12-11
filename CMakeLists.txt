@@ -17,8 +17,8 @@ add_link_options("/WX")
 #add_compile_options("$<$<COMPILE_LANGUAGE:C,CXX>:$<IF:$<CONFIG:Debug>,/ZI,/Z7>;/FS>")
 add_compile_options("$<IF:$<IN_LIST:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY;EXECUTABLE;MODULE_LIBRARY>,/Zi,/Z7>;/FS")
 
-#add_link_options("/DEBUG:FASTLINK")
-add_link_options("/DEBUG:$<IF:$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>,FULL,FASTLINK>")
+add_link_options("/DEBUG:FASTLINK")
+#add_link_options("/DEBUG:$<IF:$<IN_LIST:lib::lib,$<TARGET_PROPERTY:LINK_LIBRARIES>>,FULL,FASTLINK>")
 
 add_subdirectory(lib)
 add_subdirectory(src)
