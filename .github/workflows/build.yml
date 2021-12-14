@@ -13,13 +13,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-2019, windows-2022 ]
-        runtime: [ dynamic, static ]
-        ltcg: [ NoLTCG, LTCG ]
-        pch: [ NoPCH, PCH ]
-        debug: [ Zi, Z7 ]
-        warning: [ NoWX, WX ]
-        pdb: [ NONE, FASTLINK, FULL ]
+        os: [ windows-2022 ]
+        runtime: [ static ]
+        ltcg: [ LTCG ]
+        pch: [ PCH ]
+        debug: [ Z7 ]
+        warning: [ WX ]
+        pdb: [ FULL ]
+#        os: [ windows-2019, windows-2022 ]
+#        runtime: [ dynamic, static ]
+#        ltcg: [ NoLTCG, LTCG ]
+#        pch: [ NoPCH, PCH ]
+#        debug: [ Zi, Z7 ]
+#        warning: [ NoWX, WX ]
+#        pdb: [ NONE, FASTLINK, FULL ]
         
     steps:
     - name: Checkout
